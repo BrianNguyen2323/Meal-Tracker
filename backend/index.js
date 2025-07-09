@@ -30,3 +30,5 @@ app.use((err, req, res, next) => {
     .status(err.status || 500)
     .json(err.message || { err: 'Internal server error' });
 });
+
+// Double check to see if I need to have supabaseClient in a separate file or in index.js

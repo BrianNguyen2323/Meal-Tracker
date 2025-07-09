@@ -19,14 +19,18 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// POST request
+// TODO: POST request
 router.post('/', (req, res) => {
   const data = req.body;
   res.json({ message: 'POST received', data });
 });
 
+// Tested different address GET request
 router.get('/second', (req, res) => {
   res.json({ message: 'GET request successful' });
 });
+
+// TODO: UPDATE request
+// TODO: DELETE request
 
 module.exports = router;
