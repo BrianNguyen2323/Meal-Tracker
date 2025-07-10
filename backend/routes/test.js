@@ -5,7 +5,20 @@ const supabase = require('./supabaseClient');
 // GET request
 router.get('/', async (req, res, next) => {
   try {
-    const { data, error } = await supabase.from('Meal').select();
+    const { data, error } = await supabase
+      .from('Meal')
+      .select()
+      .order('timeFed', { ascending: false })
+      .limit(10);
+
+    if (error) {
+      return next({
+        log: `Supabase error: ${error.message}`,
+        status: 500,
+        message: { err: 'Failed to retrieve meals from database.' },
+      });
+    }
+
     res.json(data);
   } catch (error) {
     console.error('Error: ', error);
@@ -19,18 +32,96 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// TODO: POST request
-router.post('/', (req, res) => {
-  const data = req.body;
-  res.json({ message: 'POST received', data });
+// POST request
+router.post('/', async (req, res, next) => {
+  try {
+    const { mealType } = req.body;
+
+    const { data, error } = await supabase
+      .from('Meal')
+      .insert({ type: mealType })
+      .select();
+
+    if (error) {
+      return next({
+        log: `Supabase error: ${error.message}`,
+        status: 500,
+        message: { err: 'Failed to create meal into database.' },
+      });
+    }
+    res.status(201).json(data);
+  } catch (error) {
+    console.error('Error: ', error);
+    return next({
+      log: `Error creating new entry: ${error.message}`,
+      status: 502,
+      message: {
+        err: 'Error creating new entry with POST request',
+      },
+    });
+  }
+});
+
+// PUT request
+router.put('/', async (req, res, next) => {
+  try {
+    const { id, mealType } = req.body;
+
+    const { error } = await supabase
+      .from('Meal')
+      .update({ type: mealType })
+      .eq('id', id);
+
+    if (error) {
+      return next({
+        log: `Supabase error: ${error.message}`,
+        status: 500,
+        message: { err: 'Failed to update meal type database.' },
+      });
+    }
+    res.status(204);
+  } catch (error) {
+    console.error('Error: ', error);
+    return next({
+      log: `Error updating entry: ${error.message}`,
+      status: 502,
+      message: {
+        err: 'Error updating entry with PUT request',
+      },
+    });
+  }
+});
+
+// DELETE request
+router.delete('/', async (req, res, next) => {
+  try {
+    const { id } = req.body;
+
+    const { error } = await supabase.from('Meal').delete().eq('id', id);
+
+    if (error) {
+      return next({
+        log: `Supabase error: ${error.message}`,
+        status: 500,
+        message: { err: 'Failed to delete entry from database.' },
+      });
+    }
+    res.status(204).end();
+  } catch (error) {
+    console.error('Error: ', error);
+    return next({
+      log: `Error deleting entry: ${error.message}`,
+      status: 502,
+      message: {
+        err: 'Error deleting entry with DELETE request',
+      },
+    });
+  }
 });
 
 // Tested different address GET request
 router.get('/second', (req, res) => {
   res.json({ message: 'GET request successful' });
 });
-
-// TODO: UPDATE request
-// TODO: DELETE request
 
 module.exports = router;
