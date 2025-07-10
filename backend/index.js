@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // Import route file
-const testRoutes = require('./routes/test');
+const testRoutes = require('./routes/mealRoutes');
 app.use('/', testRoutes);
 
 app.listen(process.env.PORT, () => {
