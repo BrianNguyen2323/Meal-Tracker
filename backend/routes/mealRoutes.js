@@ -37,6 +37,10 @@ router.post('/', async (req, res, next) => {
   try {
     const { mealType } = req.body;
 
+    if (!mealType) {
+      return res.status(400).json({ err: 'mealType is required' });
+    }
+
     const { data, error } = await supabase
       .from('Meal')
       .insert({ type: mealType })

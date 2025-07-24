@@ -1,56 +1,31 @@
-import { Button } from '@react-navigation/elements';
 import React from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import '../global.css';
+import MealLog from './components/MealLog';
+import MealPicker from './components/MealPicker';
 
-export default function Index() {
-  //route calls and handlers
-  const handleGetRequest = async () => {
-    try {
-      //web test address
-      const response = await fetch('http://localhost:4000/');
-      //ios test address
-      // const response = await fetch('http://192.168.68.55:4000/test');
-      const json = await response.json();
-      Alert.alert('Resonse', JSON.stringify(json));
-      console.log('Response: ', JSON.stringify(json));
-    } catch (error) {
-      console.log('Error fetching data: ', error);
-      Alert.alert('Error', 'failed to fetch from backend');
-    }
-  };
-
-  const handleGetRequestTest = async () => {
-    try {
-      const response = await fetch('http://localhost:4000/second');
-      const json = await response.json();
-      console.log('Response: ', JSON.stringify(json));
-    } catch (error) {
-      console.log('Error fetching data: ', error);
-    }
-  };
-
+export default function Home() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      {/* <text className='text-3xl text-green-600'>tailwind test</text> */}
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-      <View style={styles.container}>
-        <Button onPress={handleGetRequest}>'Call GET Endpoint'</Button>
-        <Button onPress={handleGetRequestTest}>'Call GET Test Route'</Button>
+    <View className='bg-slate-600 h-full'>
+      <View className='flex flex-col items-center justify-center p-4 gap-4 '>
+      <Text className='text-4xl'> test </Text>
+        <Text className='text-6xl font-bold'>🐕FEED ME🐕</Text>
+        <Text className='text-3xl font-semibold text-red-600'>I HUNGER</Text>
       </View>
+      <View className='flex flex-row align-middle justify-center w-full gap-8'>
+        <MealPicker />
+      </View>
+      <MealLog />
+      {/* <View className='flex flex-col items-left ml-40 w-2/3'>
+        <Text className='m-10'> Meal Log </Text>
+        <View className='border-white rounded-md'>
+        <table>
+          <tr>
+            <th>Meal Type</th>
+            <th>Time</th>
+          </tr>
+        </table>
+      </View> */}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
