@@ -1,16 +1,20 @@
 import React from 'react';
-import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StatusBar, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 const MealLogFrame = () => (
   <SafeAreaProvider>
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView
+      className='h-[525px] w-[95%] border-2 border-t-0 border-blue-500 rounded-b-2xl bg-white self-center overflow-hidden'
+      style={{ paddingTop: StatusBar.currentHeight }}
+      edges={['top']}
+    >
       <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={[styles.scrollContent, { paddingBottom: 40 }]}
+        className='flex-1'
+        contentContainerStyle={{ paddingBottom: 40 }}
         showsVerticalScrollIndicator={true}
       >
-        <Text style={styles.text}>
+        <Text className='text-2xl p-3'>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad
           minim veniam.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Ut enim ad minim veniam.Lorem ipsum dolor sit amet, consectetur
@@ -18,7 +22,7 @@ const MealLogFrame = () => (
           consectetur adipiscing elit. Ut enim ad minim veniam.Lorem ipsum dolor
           sit amet, consectetur adipiscing elit. Ut enim ad minim veniam.
         </Text>
-        <Text style={styles.text}>Test</Text>
+        <Text className='text-2xl p-3'>Test</Text>
       </ScrollView>
     </SafeAreaView>
   </SafeAreaProvider>
@@ -26,52 +30,13 @@ const MealLogFrame = () => (
 
 const MealLog = () => {
   return (
-    <View style={styles.wrapper}>
-      <Text style={styles.header}>Meal Log</Text>
+    <View className='w-full items-center'>
+      <Text className='text-2xl text-center bg-[#E6E6FA] border-2 border-blue-500 border-b-0 w-[95%] py-2 rounded-t-2xl'>
+        Meal Log
+      </Text>
       <MealLogFrame />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    width: '100%', // shared dynamic width (could also use flex or Dimensions.get('window').width)
-    alignSelf: 'center',
-    alignItems: 'center',
-  },
-  header: {
-    borderWidth: 2,
-    borderColor: 'blue',
-    borderBottomWidth: 0,
-    fontSize: 24,
-    backgroundColor: 'lavender',
-    textAlign: 'center',
-    paddingVertical: 8,
-    width: '95%', // fill width of wrapper
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  container: {
-    height: 525,
-    width: '95%', // fill width of wrapper
-    paddingTop: StatusBar.currentHeight,
-    borderColor: 'blue',
-    borderWidth: 2,
-    borderTopWidth: 0,
-    // borderRadius: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    overflow: 'hidden',
-    backgroundColor: 'white',
-    alignSelf: 'center',
-  },
-  scrollContent: {
-    backgroundColor: 'transparent',
-  },
-  text: {
-    fontSize: 32,
-    padding: 12,
-  },
-});
 
 export default MealLog;

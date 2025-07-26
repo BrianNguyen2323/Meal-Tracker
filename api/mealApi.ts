@@ -1,4 +1,9 @@
-const BASE_URL = 'http://localhost:4000/';
+// import { BASE_URL } from './constants';
+// Would import BASE_URL from constants file if the detection of web or ios was working properly. Manual switching is necessary
+// web use
+// const BASE_URL = 'http://localhost:4000';
+// mobile use
+const BASE_URL = 'http://192.168.68.54:4000';
 
 export const getMeals = async () => {
   const response = await fetch(BASE_URL);
@@ -47,3 +52,5 @@ export const postMeal = async (mealType: string) => {
 //     console.log('Error fetching data: ', error);
 //   }
 // };
+
+//TODO: set up update and delete

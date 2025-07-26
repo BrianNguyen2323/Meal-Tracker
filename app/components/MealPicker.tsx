@@ -3,6 +3,7 @@ import { postMeal } from '@/api/mealApi';
 import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
 import { Alert, Modal, Pressable, Text, View } from 'react-native';
+// import GenerateRows from './LogRows';
 
 export default function MealPicker() {
   const [mealType, setMealType] = useState('');
@@ -20,6 +21,8 @@ export default function MealPicker() {
       await postMeal(mealType);
       Alert.alert('Success', 'Meal submitted!');
       console.log('Successfully submitted meal!');
+      // Thought process: trying to call GenerateRows() to try and update the MealLog to reflect the new submission
+      // GenerateRows();
       setMealType('');
     } catch (error: any) {
       Alert.alert('Error', error.message);
@@ -28,7 +31,7 @@ export default function MealPicker() {
 
   return (
     <View className='flex flex-row items-center p-4 gap-4'>
-      <Text className='text-lg text-white'>
+      <Text className='text-2xl text-white'>
         Selected Meal: {mealType || 'None'}
       </Text>
 
@@ -55,11 +58,11 @@ export default function MealPicker() {
               onValueChange={(itemValue) => setMealType(itemValue)}
               style={{ width: '100%' }}
             >
-              <Picker.Item label='Choose a meal...' value='' />
-              <Picker.Item label='Breakfast' value='Breakfast' />
-              <Picker.Item label='Lunch' value='Lunch' />
-              <Picker.Item label='Dinner' value='Dinner' />
-              <Picker.Item label='Snack' value='Snack' />
+              <Picker.Item color='black' label='Choose a meal...' value='' />
+              <Picker.Item color='black' label='Breakfast' value='Breakfast' />
+              <Picker.Item color='black' label='Lunch' value='Lunch' />
+              <Picker.Item color='black' label='Dinner' value='Dinner' />
+              <Picker.Item color='black' label='Snack' value='Snack' />
             </Picker>
 
             <View className='flex-row justify-between mt-4'>
