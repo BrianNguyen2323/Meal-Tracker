@@ -1,7 +1,7 @@
 import { getMeals } from '@/api/mealApi';
 import { Alert, Button } from 'react-native';
 
-export function TestConnection() {
+export default function TestConnection() {
   const test = async () => {
     try {
       const result = await getMeals(); // already returns parsed JSON

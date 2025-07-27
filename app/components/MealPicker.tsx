@@ -5,25 +5,25 @@ import React, { useState } from 'react';
 import { Alert, Modal, Pressable, Text, View } from 'react-native';
 // import GenerateRows from './LogRows';
 
-export default function MealPicker() {
+export default function MealPicker({
+  onSubmitSuccess,
+}: {
+  onSubmitSuccess: () => void;
+}) {
   const [mealType, setMealType] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleSubmit = async () => {
-    console.log('button clicked');
     if (!mealType) {
       Alert.alert('Error', 'Please select a meal type');
-      console.log('Error', 'Please select a meal type');
       return;
     }
 
     try {
       await postMeal(mealType);
       Alert.alert('Success', 'Meal submitted!');
-      console.log('Successfully submitted meal!');
-      // Thought process: trying to call GenerateRows() to try and update the MealLog to reflect the new submission
-      // GenerateRows();
       setMealType('');
+      onSubmitSuccess(); // call parent’s fetchMeals
     } catch (error: any) {
       Alert.alert('Error', error.message);
     }

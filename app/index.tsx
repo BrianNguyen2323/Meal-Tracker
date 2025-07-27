@@ -1,9 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import '../global.css';
-import MealPicker from './components/MealPicker';
 // import MealLog from './components/TestMealLog';
-import { TestConnection } from './components/TempGetButton';
+import TestConnection from './components/TempGetButton';
 import TestMealLog from './components/TestMealLog';
 
 export default function Home() {
@@ -15,7 +14,7 @@ export default function Home() {
       </View>
       <TestConnection />
       <View className='flex flex-row align-middle justify-center w-full gap-8'>
-        <MealPicker />
+        {/* <MealPicker /> */}
       </View>
       {/* <MealLog /> */}
       <TestMealLog />
