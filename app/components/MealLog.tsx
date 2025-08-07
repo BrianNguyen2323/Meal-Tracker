@@ -6,7 +6,7 @@ import GenerateRows from './LogRows';
 import MealPicker from './MealPicker';
 
 type Meal = {
-  id: string;
+  id: number;
   type: string;
   timeFed: string;
 };
@@ -52,7 +52,7 @@ const MealLogFrame = () => {
             showsVerticalScrollIndicator={true}
           >
             <View className='flex w-full content-start px-3'>
-              <GenerateRows meals={meals} />
+              <GenerateRows meals={meals} onSubmitSuccess={fetchMeals} />
             </View>
           </ScrollView>
         </SafeAreaView>

@@ -3,7 +3,7 @@
 // web use
 // const BASE_URL = 'http://localhost:4000';
 // mobile use
-const BASE_URL = 'http://192.168.68.53:4000';
+const BASE_URL = 'http://192.168.68.61:4000';
 
 export const getMeals = async () => {
   const response = await fetch(BASE_URL);
@@ -28,19 +28,43 @@ export const postMeal = async (mealType: string) => {
   return response.json();
 };
 
-export const updateMeal = async (mealID: number, newMealType: string) => {
-  const response = await fetch(BASE_URL, {
+export const updateMeal = async (mealID: number, mealType: string) => {
+  const response = await fetch(`${BASE_URL}/${mealID}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ newMealType }),
+    body: JSON.stringify({ mealType }),
+  });
+
+  if (!response.ok) {
+    let err;
+    try {
+      err = await response.json();
+    } catch {
+      throw new Error('Failed to update meal (invalid JSON response)');
+    }
+    throw new Error(err?.err || 'Failed to update meal');
+  }
+
+  // skip parsing JSON if the response is a 204 code
+  if (response.status === 204) return;
+
+  return response.json();
+};
+
+export const deleteMeal = async (mealID: number) => {
+  const response = await fetch(`${BASE_URL}/${mealID}`, {
+    method: 'DELETE',
   });
 
   if (!response.ok) {
     const err = await response.json();
-    throw new Error(err?.err || 'Failed to update meal');
+    throw new Error(err?.err || 'Failed to delete meal');
   }
+
+  // skip parsing JSON if the response is a 204 code
+  if (response.status === 204) return;
 
   return response.json();
 };
