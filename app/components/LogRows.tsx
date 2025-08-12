@@ -41,8 +41,10 @@ export default function GenerateRows({
                   .format('MMM D, YYYY h:mm A')}`
               : ''}
           </Text>
-          <EditButton mealID={entry.id} onSubmitSuccess={onSubmitSuccess} />
-          <DeleteButton mealID={entry.id} onSubmitSuccess={onSubmitSuccess} />
+          <View className='items-end'>
+            <EditButton mealID={entry.id} onSubmitSuccess={onSubmitSuccess} />
+            <DeleteButton mealID={entry.id} onSubmitSuccess={onSubmitSuccess} />
+          </View>
         </View>
       ))}
     </View>
