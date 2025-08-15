@@ -1,5 +1,5 @@
 const express = require('express');
-const supabase = require('./supabaseClient');
+const supabase = require('../backend/routes/supabaseClient');
 const serverless = require('serverless-http');
 
 const app = express();
