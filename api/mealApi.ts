@@ -3,7 +3,7 @@
 // web use
 // const BASE_URL = 'http://localhost:4000';
 // mobile use
-const BASE_URL = 'http://192.168.68.61:4000';
+const BASE_URL = 'http://192.168.68.55:4000';
 
 export const getMeals = async () => {
   const response = await fetch(BASE_URL);

@@ -1,17 +1,33 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import '../global.css';
-// import MealLog from './components/TestMealLog';
-import MealLog from './components/MealLog';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Button, Text, TextInput, View } from 'react-native';
 
-export default function Home() {
+export default function Index() {
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = async () => {
+    if (password === 'Oliver') {
+      await AsyncStorage.setItem('auth', 'true');
+      router.replace('/home'); // replace so they can't go "back" to index easily
+    } else {
+      setError('Wrong password');
+    }
+  };
+
   return (
-    <View className='bg-slate-600 h-full'>
-      <View className='flex flex-col items-center justify-center p-4 gap-4 '>
-        <Text className='text-6xl font-bold'>🐕FEED ME🐕</Text>
-        <Text className='text-3xl font-semibold text-red-600'>I HUNGER</Text>
-      </View>
-      <MealLog />
+    <View className='flex-1 justify-center items-center p-4'>
+      <Text className='text-xl mb-4'>Enter Password</Text>
+      <TextInput
+        className='border border-gray-400 rounded p-2 w-[50vw] mb-4'
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+      {error ? <Text className='text-red-500 mt-2'>{error}</Text> : null}
+      <Button title='Submit' onPress={handleSubmit} />
     </View>
   );
 }

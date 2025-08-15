@@ -25,7 +25,7 @@ export default function GenerateRows({
   onSubmitSuccess: () => void;
 }) {
   return (
-    <View className='w-full'>
+    <View className='w-[full]'>
       {meals.map((entry, index) => (
         <View
           key={entry.id}
@@ -41,7 +41,7 @@ export default function GenerateRows({
                   .format('MMM D, YYYY h:mm A')}`
               : ''}
           </Text>
-          <View className='items-end'>
+          <View className='items-end flex flex-row space-x-8'>
             <EditButton mealID={entry.id} onSubmitSuccess={onSubmitSuccess} />
             <DeleteButton mealID={entry.id} onSubmitSuccess={onSubmitSuccess} />
           </View>
