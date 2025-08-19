@@ -4,7 +4,7 @@
 // const BASE_URL = 'http://localhost:4000';
 // mobile use
 const BASE_URL =
-  'http://192.168.68.55:4000https://meal-tracker-git-web-ui-nguyenbrian2323-gmailcoms-projects.vercel.app/';
+  'https://meal-tracker-git-web-ui-nguyenbrian2323-gmailcoms-projects.vercel.app/';
 
 export const getMeals = async () => {
   const response = await fetch(BASE_URL);
