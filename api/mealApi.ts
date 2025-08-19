@@ -5,10 +5,24 @@
 // mobile use
 const BASE_URL = 'https://develop-meal-tracker-nine.vercel.app/api/meals';
 
+// export const getMeals = async () => {
+//   const response = await fetch(BASE_URL);
+//   if (!response.ok) throw new Error('Failed to fetch meals');
+//   return response.json();
+// };
+
 export const getMeals = async () => {
   const response = await fetch(BASE_URL);
-  if (!response.ok) throw new Error('Failed to fetch meals');
-  return response.json();
+  // Log the raw response for debugging
+  const text = await response.text();
+  console.log('Raw response from API:', text);
+  // Try to parse as JSON (may throw if not valid JSON)
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    console.error('Failed to parse JSON:', e);
+    throw e;
+  }
 };
 
 export const postMeal = async (mealType: string) => {
