@@ -3,8 +3,7 @@
 // web use
 // const BASE_URL = 'http://localhost:4000';
 // mobile use
-const BASE_URL =
-  'https://meal-tracker-git-web-ui-nguyenbrian2323-gmailcoms-projects.vercel.app/';
+const BASE_URL = 'https://develop-meal-tracker-nine.vercel.app/api/meals';
 
 export const getMeals = async () => {
   const response = await fetch(BASE_URL);
