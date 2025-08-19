@@ -1,4 +1,4 @@
-import { deleteMeal } from '@/api/mealApi';
+import { deleteMeal } from '@/util/mealApi';
 import React, { useState } from 'react';
 import { Alert, Modal, Pressable, Text, View } from 'react-native';
 

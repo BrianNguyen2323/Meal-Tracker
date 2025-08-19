@@ -1,4 +1,4 @@
-import { updateMeal } from '@/api/mealApi';
+import { updateMeal } from '@/util/mealApi';
 import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
 import { Alert, Modal, Pressable, Text, View } from 'react-native';

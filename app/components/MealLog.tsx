@@ -1,4 +1,4 @@
-import { getMeals } from '@/api/mealApi';
+import { getMeals } from '@/util/mealApi';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, StatusBar, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
