@@ -1,4 +1,10 @@
 const supabase = require('../backend/routes/supabaseClient');
+const { createClient } = require('@supabase/supabase-js');
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_KEY
+);
 
 module.exports = async (req, res) => {
   // --- CORS headers ---
