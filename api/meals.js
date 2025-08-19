@@ -1,4 +1,3 @@
-const supabase = require('../backend/routes/supabaseClient');
 const { createClient } = require('@supabase/supabase-js');
 
 const supabase = createClient(
