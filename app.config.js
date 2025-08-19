@@ -41,8 +41,10 @@ export default () => ({
 
     // ✅ Custom runtime values
     extra: {
-      WEB_BASE_URL: 'http://localhost:4000', // your web backend
-      MOBILE_BASE_URL: 'http://192.168.68.52:4000', // your local IP
+      WEB_BASE_URL:
+        'https://meal-tracker-git-web-ui-nguyenbrian2323-gmailcoms-projects.vercel.app/', // your web backend
+      MOBILE_BASE_URL:
+        'https://meal-tracker-git-web-ui-nguyenbrian2323-gmailcoms-projects.vercel.app/', // your local IP
     },
   },
 });
