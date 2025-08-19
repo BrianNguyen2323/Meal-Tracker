@@ -19,6 +19,34 @@ module.exports = async (req, res) => {
     return res.status(200).end();
   }
 
+  // --- Parse JSON body for non-GET requests ---
+  let body = {};
+  if (req.method !== 'GET') {
+    try {
+      // Vercel does not auto-parse body, so handle it manually if needed
+      if (
+        req.body &&
+        typeof req.body === 'object' &&
+        Object.keys(req.body).length > 0
+      ) {
+        body = req.body;
+      } else {
+        body = JSON.parse(
+          await new Promise((resolve, reject) => {
+            let data = '';
+            req.on('data', (chunk) => {
+              data += chunk;
+            });
+            req.on('end', () => resolve(data || '{}'));
+            req.on('error', reject);
+          })
+        );
+      }
+    } catch (e) {
+      return res.status(400).json({ err: 'Invalid JSON body' });
+    }
+  }
+
   try {
     if (req.method === 'GET') {
       const { data, error } = await supabase
@@ -32,7 +60,7 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'POST') {
-      const { mealType } = req.body;
+      const { mealType } = body;
       if (!mealType)
         return res.status(400).json({ err: 'mealType is required' });
 
@@ -46,7 +74,7 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'PATCH') {
-      const { id, mealType } = req.body;
+      const { id, mealType } = body;
       if (!id || !mealType)
         return res.status(400).json({ err: 'id and mealType are required' });
 
@@ -60,7 +88,7 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'DELETE') {
-      const { id } = req.body;
+      const { id } = body;
       if (!id) return res.status(400).json({ err: 'id is required' });
 
       const { error } = await supabase.from('Meal').delete().eq('id', id);
