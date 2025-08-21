@@ -41,8 +41,8 @@ export default () => ({
 
     // ✅ Custom runtime values
     extra: {
-      WEB_BASE_URL: 'https://develop-meal-tracker-nine.vercel.app/api/meals', // your web backend
-      MOBILE_BASE_URL: 'https://develop-meal-tracker-nine.vercel.app/api/meals', // your local IP
+      WEB_BASE_URL: 'https://meal-tracker-sigma.vercel.app/api/meals', // your web backend
+      MOBILE_BASE_URL: 'https://meal-tracker-sigma.vercel.app/api/meals', // your local IP
     },
   },
 });
