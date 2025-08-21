@@ -82,5 +82,3 @@ export const deleteMeal = async (mealID: number) => {
 
   return response.json();
 };
-
-//TODO: set up update and delete
