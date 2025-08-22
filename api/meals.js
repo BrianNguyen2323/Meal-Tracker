@@ -1,29 +1,26 @@
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // --- CORS headers ---
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Or restrict to your frontend domain
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET,POST,PATCH,DELETE,OPTIONS'
   );
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
-  // --- Parse JSON body for non-GET requests ---
   let body = {};
   if (req.method !== 'GET') {
     try {
-      // Vercel does not auto-parse body, so handle it manually if needed
       if (
         req.body &&
         typeof req.body === 'object' &&
@@ -34,9 +31,7 @@ module.exports = async (req, res) => {
         body = JSON.parse(
           await new Promise((resolve, reject) => {
             let data = '';
-            req.on('data', (chunk) => {
-              data += chunk;
-            });
+            req.on('data', (chunk) => (data += chunk));
             req.on('end', () => resolve(data || '{}'));
             req.on('error', reject);
           })
@@ -103,9 +98,4 @@ module.exports = async (req, res) => {
     console.error(error);
     return res.status(500).json({ error: error.message });
   }
-};
-
-//api test to see that the API is working
-export default function handler(req, res) {
-  res.status(200).json({ message: 'API is working!' });
 }
