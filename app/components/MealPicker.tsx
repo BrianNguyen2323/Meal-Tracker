@@ -33,7 +33,7 @@ export default function MealPicker({
     <View className='flex md:flex-row flex-col items-center p-4 gap-4'>
       <Pressable
         onPress={() => setModalVisible(true)}
-        className='bg-violet-500 md:px-4 md:py-2 px-8 py-6 rounded'
+        className='bg-violet-500 md:px-4 md:py-2 px-8 py-6 rounded border-2 border-violet-800'
       >
         <Text className='text-white'>Choose Meal Type</Text>
       </Pressable>
