@@ -49,21 +49,23 @@ const MealLogFrame = () => {
         </View>
       </View>
       <SafeAreaProvider>
-        <SafeAreaView
-          className='h-[500px] w-[95vw] border-2 border-t-0 border-blue-500 rounded-b-2xl bg-white self-center overflow-hidden'
-          style={{ paddingTop: StatusBar.currentHeight }}
-          edges={['top']}
-        >
-          <ScrollView
-            className='flex-1 w-full'
-            contentContainerStyle={{ paddingBottom: 40 }}
-            showsVerticalScrollIndicator={true}
+        <View className='md:h-[500px] h-dvh md:w-[100vw] w-dvw'>
+          <SafeAreaView
+            className='w-[95%] border-2 border-t-0 border-blue-500 rounded-b-2xl bg-white self-center overflow-hidden'
+            style={{ paddingTop: StatusBar.currentHeight }}
+            edges={['top']}
           >
-            <View className='flex w-full content-start px-3'>
-              <GenerateRows meals={meals} onSubmitSuccess={fetchMeals} />
-            </View>
-          </ScrollView>
-        </SafeAreaView>
+            <ScrollView
+              className='flex-1 w-full'
+              contentContainerStyle={{ paddingBottom: 40 }}
+              showsVerticalScrollIndicator={true}
+            >
+              <View className='flex w-full content-start px-3'>
+                <GenerateRows meals={meals} onSubmitSuccess={fetchMeals} />
+              </View>
+            </ScrollView>
+          </SafeAreaView>
+        </View>
       </SafeAreaProvider>
     </View>
   );
