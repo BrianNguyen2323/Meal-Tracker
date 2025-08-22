@@ -1,15 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" },
-    { "src": "dist/**", "use": "@vercel/static" }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1.js" },
-
-    { "src": "/_expo/(.*)", "dest": "/dist/_expo/$1" },
-    { "src": "/(.*\\..*)", "dest": "/dist/$1" },
-
-    { "src": "/(.*)", "dest": "/dist/index.html" }
-  ]
+  "buildCommand": "expo export -p web",
+  "outputDirectory": "dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
