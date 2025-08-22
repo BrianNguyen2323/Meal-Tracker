@@ -38,13 +38,14 @@ const MealLogFrame = () => {
         </Text>
         {/* View below is the divider */}
         <View className='bg-gray-400 h-[1px] w-[90%] self-center' />
-        <View className='flex flex-row pt-2 items-center w-[125vw] justify-between ml-8'>
-          <Text className='flex-1 text-gray-500 italic text-xl font-medium'>
-            Meal
-          </Text>
-          <Text className='flex-1 text-gray-500 italic text-xl font-medium'>
+        <View className='flex flex-row pt-2 items-center w-[125vw] justify-between md:ml-8 ml-2'>
+          <Text className='flex-1 text-gray-500 italic md:text-xl text-lg font-medium'>
             Date & Time
           </Text>
+          <Text className='flex-1 text-gray-500 italic md:text-xl text-lg font-medium'>
+            Meal
+          </Text>
+          <Text className='flex-1' />
           <Text className='flex-1' />
         </View>
       </View>
