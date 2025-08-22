@@ -32,13 +32,17 @@ export const postMeal = async (mealType: string) => {
 };
 
 export const updateMeal = async (mealID: number, mealType: string) => {
-  const response = await fetch(`${BASE_URL}/${mealID}`, {
+  console.log('before calling fetch');
+
+  const response = await fetch(`${BASE_URL}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ mealType }),
+    body: JSON.stringify({ mealID, mealType }),
   });
+
+  console.log('Response:', response.status, response.statusText);
 
   if (!response.ok) {
     let err;
@@ -57,8 +61,12 @@ export const updateMeal = async (mealID: number, mealType: string) => {
 };
 
 export const deleteMeal = async (mealID: number) => {
-  const response = await fetch(`${BASE_URL}/${mealID}`, {
+  const response = await fetch(`${BASE_URL}`, {
     method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ mealID }),
   });
 
   if (!response.ok) {

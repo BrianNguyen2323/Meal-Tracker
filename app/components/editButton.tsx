@@ -22,6 +22,7 @@ export default function EditButton({
     }
 
     try {
+      console.log('Submitting meal update:', { mealID, mealType });
       await updateMeal(mealID, mealType);
       Alert.alert('Success', 'Meal updated!');
       setMealType('');

@@ -69,24 +69,27 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'PATCH') {
-      const { id, mealType } = body;
-      if (!id || !mealType)
-        return res.status(400).json({ err: 'id and mealType are required' });
+      const { mealID, mealType } = body;
+      console.log('PATCH body:', body);
+      if (!mealID || !mealType)
+        return res
+          .status(400)
+          .json({ err: 'mealID and mealType are required' });
 
       const { error } = await supabase
         .from('Meal')
         .update({ type: mealType })
-        .eq('id', id);
+        .eq('id', mealID);
 
       if (error) return res.status(500).json({ err: error.message });
       return res.status(204).end();
     }
 
     if (req.method === 'DELETE') {
-      const { id } = body;
-      if (!id) return res.status(400).json({ err: 'id is required' });
+      const { mealID } = body;
+      if (!mealID) return res.status(400).json({ err: 'id is required' });
 
-      const { error } = await supabase.from('Meal').delete().eq('id', id);
+      const { error } = await supabase.from('Meal').delete().eq('id', mealID);
 
       if (error) return res.status(500).json({ err: error.message });
       return res.status(204).end();
