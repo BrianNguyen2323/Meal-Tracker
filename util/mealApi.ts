@@ -71,7 +71,7 @@ export const deleteMeal = async (mealID: number) => {
 
   if (!response.ok) {
     const err = await response.json();
-    throw new Error(err?.err || 'Failed to delete meal');
+    throw new Error(err?.err || 'Failed to delete meal!');
   }
 
   // skip parsing JSON if the response is a 204 code
