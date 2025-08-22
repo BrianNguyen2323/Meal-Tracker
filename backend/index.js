@@ -19,7 +19,7 @@ app.use(express.json());
 const testRoutes = require('./routes/mealRoutes');
 app.use('/', testRoutes);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${process.env.PORT}`);
 });
 

@@ -1,56 +1,33 @@
-import { Button } from '@react-navigation/elements';
-import React from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Button, Text, TextInput, View } from 'react-native';
 
 export default function Index() {
-  //route calls and handlers
-  const handleGetRequest = async () => {
-    try {
-      //web test address
-      const response = await fetch('http://localhost:4000/');
-      //ios test address
-      // const response = await fetch('http://192.168.68.55:4000/test');
-      const json = await response.json();
-      Alert.alert('Resonse', JSON.stringify(json));
-      console.log('Response: ', JSON.stringify(json));
-    } catch (error) {
-      console.log('Error fetching data: ', error);
-      Alert.alert('Error', 'failed to fetch from backend');
-    }
-  };
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
 
-  const handleGetRequestTest = async () => {
-    try {
-      const response = await fetch('http://localhost:4000/second');
-      const json = await response.json();
-      console.log('Response: ', JSON.stringify(json));
-    } catch (error) {
-      console.log('Error fetching data: ', error);
+  const handleSubmit = async () => {
+    if (password === 'Oliver') {
+      await AsyncStorage.setItem('auth', 'true');
+      router.replace('/home'); // replace so they can't go "back" to index easily
+    } else {
+      setError('Wrong password');
     }
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      {/* <text className='text-3xl text-green-600'>tailwind test</text> */}
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-      <View style={styles.container}>
-        <Button onPress={handleGetRequest}>'Call GET Endpoint'</Button>
-        <Button onPress={handleGetRequestTest}>'Call GET Test Route'</Button>
-      </View>
+    <View className='flex-1 justify-center items-center p-4'>
+      <Text className='text-xl mb-4'>Enter Password</Text>
+      <TextInput
+        className='border border-gray-400 rounded p-2 w-[50vw] mb-4'
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+      {error ? <Text className='text-red-500 mt-2'>{error}</Text> : null}
+      <Button title='Submit' onPress={handleSubmit} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

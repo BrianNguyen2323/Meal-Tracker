@@ -9,7 +9,7 @@ router.get('/', async (req, res, next) => {
       .from('Meal')
       .select()
       .order('timeFed', { ascending: false })
-      .limit(10);
+      .limit(15);
 
     if (error) {
       return next({
@@ -37,6 +37,10 @@ router.post('/', async (req, res, next) => {
   try {
     const { mealType } = req.body;
 
+    if (!mealType) {
+      return res.status(400).json({ err: 'mealType is required' });
+    }
+
     const { data, error } = await supabase
       .from('Meal')
       .insert({ type: mealType })
@@ -63,9 +67,10 @@ router.post('/', async (req, res, next) => {
 });
 
 // PUT request
-router.put('/', async (req, res, next) => {
+router.patch('/:id', async (req, res, next) => {
   try {
-    const { id, mealType } = req.body;
+    const id = parseInt(req.params.id, 10);
+    const { mealType } = req.body;
 
     const { error } = await supabase
       .from('Meal')
@@ -79,7 +84,7 @@ router.put('/', async (req, res, next) => {
         message: { err: 'Failed to update meal type database.' },
       });
     }
-    res.status(204);
+    res.status(204).end();
   } catch (error) {
     console.error('Error: ', error);
     return next({
@@ -93,11 +98,12 @@ router.put('/', async (req, res, next) => {
 });
 
 // DELETE request
-router.delete('/', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
+    const mealID = parseInt(id, 10);
 
-    const { error } = await supabase.from('Meal').delete().eq('id', id);
+    const { error } = await supabase.from('Meal').delete().eq('id', mealID);
 
     if (error) {
       return next({
