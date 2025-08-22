@@ -9,13 +9,29 @@ export default function Index() {
   const router = useRouter();
 
   const handleSubmit = async () => {
-    if (password === 'Oliver') {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password }),
+    });
+
+    const loginResponse = await res.json();
+    if (loginResponse.success) {
       await AsyncStorage.setItem('auth', 'true');
       router.replace('/home'); // replace so they can't go "back" to index easily
     } else {
       setError('Wrong password');
     }
   };
+
+  // const handleSubmit = async () => {
+  //   if (password === loginPassword) {
+  //     await AsyncStorage.setItem('auth', 'true');
+  //     router.replace('/home'); // replace so they can't go "back" to index easily
+  //   } else {
+  //     setError('Wrong password');
+  //   }
+  // };
 
   return (
     <View className='flex-1 justify-center items-center p-4'>

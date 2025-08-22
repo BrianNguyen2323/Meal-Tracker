@@ -33,15 +33,15 @@ export default function GenerateRows({
             index % 2 === 0 ? 'bg-gray-100' : 'bg-transparent'
           }`}
         >
-          <Text className='text-2xl text-black p-3'>{entry.type}</Text>
-          <Text className='items-end'>
+          <Text className='items-end font-bold md:text-2xl text-xl'>
             {entry.timeFed
               ? `${dayjs(entry.timeFed)
                   .tz('America/Los_Angeles')
-                  .format('MMM D, YYYY h:mm A')}`
+                  .format('M/D/YY')}`
               : ''}
           </Text>
-          <View className='items-end flex flex-row space-x-8'>
+          <Text className='md:text-xl text-black p-3'>{entry.type}</Text>
+          <View className='items-end flex flex-row md:space-x-8 space-x-4'>
             <EditButton mealID={entry.id} onSubmitSuccess={onSubmitSuccess} />
             <DeleteButton mealID={entry.id} onSubmitSuccess={onSubmitSuccess} />
           </View>

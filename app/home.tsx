@@ -24,7 +24,7 @@ export default function Home() {
   if (loading) return null;
 
   return (
-    <View className='bg-slate-600 h-full'>
+    <View className='bg-slate-600 md:h-full h-svh w-full'>
       <View className='items-end m-1'>
         <Button
           title='Log Out'
@@ -35,8 +35,10 @@ export default function Home() {
         />
       </View>
       <View className='flex flex-col items-center justify-center p-4 gap-4 '>
-        <Text className='text-6xl font-bold'>🐕FEED ME🐕</Text>
-        <Text className='text-3xl font-semibold text-red-600'>I HUNGER</Text>
+        <Text className='md:text-6xl text-4xl font-bold'>🐕FEED ME🐕</Text>
+        <Text className='md:text-3xl text-2xl font-semibold text-red-600'>
+          I HUNGER
+        </Text>
       </View>
       <MealLog />
     </View>

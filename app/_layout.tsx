@@ -1,14 +1,12 @@
 import { Stack } from 'expo-router';
-// import "nativewind/tailwind.css";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import '../global.css';
 
 export default function RootLayout() {
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    />
+    <SafeAreaView className='flex-1 bg-white overflow-hidden'>
+      <Stack screenOptions={{ headerShown: false }} />
+    </SafeAreaView>
   );
 }
