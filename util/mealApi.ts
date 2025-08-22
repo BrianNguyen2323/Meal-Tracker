@@ -1,15 +1,4 @@
-// import { BASE_URL } from './constants';
-// Would import BASE_URL from constants file if the detection of web or ios was working properly. Manual switching is necessary
-// web use
-// const BASE_URL = 'http://localhost:4000';
-// mobile use
-const BASE_URL = 'https://meal-tracker-sigma.vercel.app/api/meals';
-
-// export const getMeals = async () => {
-//   const response = await fetch(BASE_URL);
-//   if (!response.ok) throw new Error('Failed to fetch meals');
-//   return response.json();
-// };
+const BASE_URL = '/api/meals';
 
 export const getMeals = async () => {
   const response = await fetch(BASE_URL);
