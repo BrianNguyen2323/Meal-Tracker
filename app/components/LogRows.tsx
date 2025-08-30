@@ -26,32 +26,43 @@ export default function GenerateRows({
 }) {
   return (
     <View className='w-[full]'>
-      {meals.map((entry, index) => (
-        <View
-          key={entry.id}
-          className={`w-full flex flex-row justify-between items-center
+      {meals.map((entry, index) => {
+        const isWater = entry.type === 'Water Refill';
+        return (
+          <View
+            key={entry.id}
+            className={`w-full flex flex-row justify-between items-center
       ${
-        entry.type === 'Water Refill'
-          ? 'bg-blue-100'
+        isWater
+          ? 'bg-blue-300'
           : index % 2 === 0
             ? 'bg-gray-100'
             : 'bg-transparent'
       }`}
-        >
-          <Text className='items-end font-bold md:text-2xl text-xl'>
-            {entry.timeFed
-              ? `${dayjs(entry.timeFed)
-                  .tz('America/Los_Angeles')
-                  .format('M/D/YY h:mm A')}`
-              : ''}
-          </Text>
-          <Text className='md:text-xl text-black p-3'>{entry.type}</Text>
-          <View className='items-end flex flex-row md:space-x-8 space-x-4'>
-            <EditButton mealID={entry.id} onSubmitSuccess={onSubmitSuccess} />
-            <DeleteButton mealID={entry.id} onSubmitSuccess={onSubmitSuccess} />
+          >
+            <Text className='items-end font-bold md:text-2xl text-xl'>
+              {entry.timeFed
+                ? `${dayjs(entry.timeFed)
+                    .tz('America/Los_Angeles')
+                    .format('M/D/YY h:mm A')}`
+                : ''}
+            </Text>
+            <Text className='md:text-xl text-black p-3'>{entry.type}</Text>
+            <View className='items-end flex flex-row md:space-x-8 space-x-4'>
+              {!isWater && (
+                <EditButton
+                  mealID={entry.id}
+                  onSubmitSuccess={onSubmitSuccess}
+                />
+              )}
+              <DeleteButton
+                mealID={entry.id}
+                onSubmitSuccess={onSubmitSuccess}
+              />
+            </View>
           </View>
-        </View>
-      ))}
+        );
+      })}
     </View>
   );
 }

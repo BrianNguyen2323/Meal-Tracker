@@ -29,12 +29,12 @@ const MealLogFrame = () => {
   }, [fetchMeals]);
 
   return (
-    <View className='flex flex-row items-center'>
-      <View className='flex flex-col items-center text-center w-[95vw]'>
+    <View className='flex flex-col items-center text-center w-[95vw]'>
+      <View className='flex flex-row items-center'>
         <View className='pb-4'>
           <MealPicker onSubmitSuccess={fetchMeals} />
         </View>
-        <View>
+        <View className='self-start pt-4'>
           <WaterRefillButton onSubmitSuccess={fetchMeals} />
         </View>
       </View>

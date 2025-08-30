@@ -14,7 +14,7 @@ export default function WaterRefillButton({
   const handleWaterRefillSubmit = async () => {
     try {
       await postWaterRefill();
-      Alert.alert('Success', 'WaterRefill entry added!');
+      Alert.alert('Success', 'Water Refill entry added!');
       onSubmitSuccess();
     } catch (error: any) {
       Alert.alert('Error', error.message);
@@ -24,10 +24,10 @@ export default function WaterRefillButton({
   return (
     <View>
       <Pressable
-        className='p-2 border-2 rounded border-blue-600 bg-white text-center'
         onPress={() => setModalVisible(true)}
+        className='w-18 h-18 md:w-22 md:h-22 rounded border-2 border-blue-600 bg-white items-center justify-center'
       >
-        <Text>💧</Text>
+        <Text className='md:text-2xl text-xl'>💧</Text>
       </Pressable>
 
       <Modal

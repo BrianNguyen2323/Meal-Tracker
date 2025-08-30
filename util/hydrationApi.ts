@@ -7,9 +7,12 @@ export const postWaterRefill = async () => {
   });
 
   if (!response.ok) {
-    const err = await response.json();
-    throw new Error(err?.err || 'Failed to submit hydration entry');
+    let msg = 'Failed to submit water refill entry';
+    try {
+      const body = await response.json();
+      msg = body?.err || body?.error || msg;
+    } catch {}
+    throw new Error(msg);
   }
-
   return response.json();
 };

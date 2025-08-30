@@ -1,9 +1,7 @@
-// components/MealPicker.tsx
 import { postMeal } from '@/util/mealApi';
 import { Picker } from '@react-native-picker/picker';
 import React, { useState } from 'react';
 import { Alert, Modal, Pressable, Text, View } from 'react-native';
-// import GenerateRows from './LogRows';
 
 export default function MealPicker({
   onSubmitSuccess,
