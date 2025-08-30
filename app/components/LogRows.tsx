@@ -29,15 +29,20 @@ export default function GenerateRows({
       {meals.map((entry, index) => (
         <View
           key={entry.id}
-          className={`w-full flex flex-row justify-between items-center ${
-            index % 2 === 0 ? 'bg-gray-100' : 'bg-transparent'
-          }`}
+          className={`w-full flex flex-row justify-between items-center
+      ${
+        entry.type === 'Water Refill'
+          ? 'bg-blue-100'
+          : index % 2 === 0
+            ? 'bg-gray-100'
+            : 'bg-transparent'
+      }`}
         >
           <Text className='items-end font-bold md:text-2xl text-xl'>
             {entry.timeFed
               ? `${dayjs(entry.timeFed)
                   .tz('America/Los_Angeles')
-                  .format('M/D/YY')}`
+                  .format('M/D/YY h:mm A')}`
               : ''}
           </Text>
           <Text className='md:text-xl text-black p-3'>{entry.type}</Text>
