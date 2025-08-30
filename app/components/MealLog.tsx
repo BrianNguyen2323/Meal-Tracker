@@ -4,6 +4,7 @@ import { ScrollView, StatusBar, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import GenerateRows from './LogRows';
 import MealPicker from './MealPicker';
+import WaterRefillButton from './waterRefillButton';
 
 type Meal = {
   id: number;
@@ -29,8 +30,13 @@ const MealLogFrame = () => {
 
   return (
     <View className='flex flex-col items-center text-center w-[95vw]'>
-      <View className='pb-4'>
-        <MealPicker onSubmitSuccess={fetchMeals} />
+      <View className='flex flex-row items-center'>
+        <View className='pb-4'>
+          <MealPicker onSubmitSuccess={fetchMeals} />
+        </View>
+        <View className='self-start pt-4'>
+          <WaterRefillButton onSubmitSuccess={fetchMeals} />
+        </View>
       </View>
       <View className='flex flex-column text-center bg-[#E6E6FA] border-2 border-blue-500 border-b-0 w-[100%] py-2 rounded-t-2xl'>
         <Text className='text-2xl pb-2 font-semibold self-center'>
